@@ -1,16 +1,23 @@
 // setting object a DOM object 
-venueNameEl = document.querySelector("#placeholder"); // we'll need to change the #placeholder Id to the actual id of the button once the button has an ID
-
+venueNameEl = document.querySelector("#listOfEvents");
+nameInputEl = document.querySelector("#userInput");
+submitButtonEl = document.querySelector("#button");
 // Inital Ticket Master API Pull
 var buttonSubmit = function(event) {
     // prevent page from refreshing
     event.preventDefault();
+
   
     // get value from input element
-    var venuename = nameInputEl.value.trim();
-  
-    if (venuename) {
-      getVenueId(venuename);
+    var venueName = nameInputEl.value.trim();
+    var venueSplit = venueName.split(" ");
+    var venueNoSpace = venueSplit.join("");
+    console.log(venueName);
+    console.log(venueSplit);
+    console.log(venueNoSpace);
+
+    if (venueName) {
+      getVenueId(venueName);
   
     } else {
       alert("Please enter a Venue name");
@@ -18,9 +25,10 @@ var buttonSubmit = function(event) {
   };
 
 // Grabs the Venues Id using its Name
-  var getVenueId = function(user) {
+  var getVenueId = function(name) {
+    
     // format the github api url
-    var apiUrl= "https://app.ticketmaster.com/discovery/v2/venues.json?keyword=FirstAvenue&apikey=" + configTicket.apiKey;
+    var apiUrl= "https://app.ticketmaster.com/discovery/v2/venues.json?keyword=" + name + "&apikey=" + configTicket.apiKey;
     console.log(apiUrl);
     // make a get request to url
     fetch(apiUrl)
@@ -43,6 +51,7 @@ var buttonSubmit = function(event) {
   };
 
 var grabName = function(id){
+  
   var SearchByIdAPI= "https://app.ticketmaster.com/discovery/v2/events.json?size=10&venueId=" + id + "&apikey=" + configTicket.apiKey;
     console.log(SearchByIdAPI);
   
@@ -52,7 +61,8 @@ var grabName = function(id){
       if (response.ok) {
         response.json().then(function(data) {
         eventsList = data._embedded.events;
-        // populateVenueList(eventsList);
+        console.log(eventsList)
+        populateVenueList(eventsList);
 
         });
       } else {
@@ -65,7 +75,10 @@ var grabName = function(id){
 }
 
 var populateVenueList = function(eventsList){
-
+  var listItemEl = document.createElement("div");
+  listItemEl.textContent = eventsList[0].name + " " + eventsList[0].dates.start.localDate;
+  console.log(listItemEl);
+  venueNameEl.appendChild(listItemEl);
 }
 
-  getVenueId();
+submitButtonEl.addEventListener("click", buttonSubmit);
