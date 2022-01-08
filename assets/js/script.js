@@ -28,7 +28,7 @@ var buttonSubmit = function(event) {
   var getVenueId = function(name) {
     
     // format the github api url
-    var apiUrl= "https://app.ticketmaster.com/discovery/v2/venues.json?keyword=FirstAvenue&apikey=" + configTicket.apiKey;
+    var apiUrl= "https://app.ticketmaster.com/discovery/v2/venues.json?keyword=" + name + "&apikey=" + configTicket.apiKey;
     console.log(apiUrl);
     // make a get request to url
     fetch(apiUrl)
