@@ -75,10 +75,12 @@ var grabName = function(id){
 }
 
 var populateVenueList = function(eventsList){
+  for (i=0;i<10;i++){
   var listItemEl = document.createElement("div");
-  listItemEl.textContent = eventsList[0].name + " " + eventsList[0].dates.start.localDate;
+  listItemEl.textContent = eventsList[i].name + " " + eventsList[i].dates.start.localDate + " " + eventsList[i].classifications[0].genre.name;
   console.log(listItemEl);
   venueNameEl.appendChild(listItemEl);
+  }
 }
 
 submitButtonEl.addEventListener("click", buttonSubmit);
