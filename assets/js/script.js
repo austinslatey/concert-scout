@@ -1,5 +1,9 @@
 // setting object a DOM object 
-venueNameEl = document.querySelector("#listOfEvents");
+artistNameEl = document.querySelector("#name");
+dateEl = document.querySelector("#date");
+genreEl = document.querySelector("#genre");
+mainEl = document.querySelector("#main");
+
 nameInputEl = document.querySelector("#userInput");
 submitButtonEl = document.querySelector("#button");
 // Inital Ticket Master API Pull
@@ -79,25 +83,40 @@ var populateVenueList = function(eventsList){
   mainContainer.classList = "mainContainer";
   for (i=0;i<10;i++){
 
-  var subcontainer = document.createElement("div");
-  subcontainer.classList = "subContainer";
+  // var subcontainer = document.createElement("div");
+  // subcontainer.classList = "subContainer";
 
+  // name of artist and dom creation
   var nameItemEl = document.createElement("div");
+  var subcontainerName = document.createElement("div");
+  subcontainerName.classList = "subContainer";
   nameItemEl.textContent = (eventsList[i].name);
 
+  // date of event and DOM creation
   var dateItemEl = document.createElement("div");
   dateItemEl.textContent = (eventsList[i].dates.start.localDate);
+  var subcontainerDate = document.createElement("div");
+  subcontainerDate.classList = "subContainer";
 
+  // genre of artist and DOM creation
   var genreItemEl = document.createElement("div");
   genreItemEl.textContent = (eventsList[i].classifications[0].genre.name);
+  var subcontainerGenre = document.createElement("div");
+  subcontainerGenre.classList = "subContainer";
 
-  subcontainer.append(nameItemEl, dateItemEl, genreItemEl);
+  // appending DOM elements to relavant subcontainers
+  // subcontainer.append(nameItemEl, dateItemEl, genreItemEl);
+  subcontainerName.appendChild(nameItemEl);
+  subcontainerDate.appendChild(dateItemEl);
+  subcontainerGenre.appendChild(genreItemEl);
 
-  mainContainer.appendChild(subcontainer);
+  // mainContainer.appendChild(subcontainer);
 
-  // listItemEl.textContent = eventsList[i].name + " " + eventsList[i].dates.start.localDate + " " + eventsList[i].classifications[0].genre.name;
-  // console.log(listItemEl);
-  venueNameEl.appendChild(mainContainer);
+  //appending sub containers to HTML divs
+
+  artistNameEl.appendChild(subcontainerName);
+  dateEl.appendChild(subcontainerDate);
+  genreEl.appendChild(subcontainerGenre);
   }
 }
 
