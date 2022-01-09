@@ -88,18 +88,21 @@ var populateVenueList = function(eventsList){
 
   // name of artist and dom creation
   var nameItemEl = document.createElement("div");
+  nameItemEl.classList = "name";
   var subcontainerName = document.createElement("div");
   subcontainerName.classList = "subContainer";
   nameItemEl.textContent = (eventsList[i].name);
 
   // date of event and DOM creation
   var dateItemEl = document.createElement("div");
+  dateItemEl.classList = "date";
   dateItemEl.textContent = (eventsList[i].dates.start.localDate);
   var subcontainerDate = document.createElement("div");
   subcontainerDate.classList = "subContainer";
 
   // genre of artist and DOM creation
   var genreItemEl = document.createElement("div");
+  genreItemEl.classList = "genre";
   genreItemEl.textContent = (eventsList[i].classifications[0].genre.name);
   var subcontainerGenre = document.createElement("div");
   subcontainerGenre.classList = "subContainer";
