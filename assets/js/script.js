@@ -75,11 +75,29 @@ var grabName = function(id){
 }
 
 var populateVenueList = function(eventsList){
+  var mainContainer = document.createElement("div");
+  mainContainer.classList = "mainContainer";
   for (i=0;i<10;i++){
-  var listItemEl = document.createElement("div");
-  listItemEl.textContent = eventsList[i].name + " " + eventsList[i].dates.start.localDate + " " + eventsList[i].classifications[0].genre.name;
-  console.log(listItemEl);
-  venueNameEl.appendChild(listItemEl);
+
+  var subcontainer = document.createElement("div");
+  subcontainer.classList = "subContainer";
+
+  var nameItemEl = document.createElement("div");
+  nameItemEl.textContent = (eventsList[i].name);
+
+  var dateItemEl = document.createElement("div");
+  dateItemEl.textContent = (eventsList[i].dates.start.localDate);
+
+  var genreItemEl = document.createElement("div");
+  genreItemEl.textContent = (eventsList[i].classifications[0].genre.name);
+
+  subcontainer.append(nameItemEl, dateItemEl, genreItemEl);
+
+  mainContainer.appendChild(subcontainer);
+
+  // listItemEl.textContent = eventsList[i].name + " " + eventsList[i].dates.start.localDate + " " + eventsList[i].classifications[0].genre.name;
+  // console.log(listItemEl);
+  venueNameEl.appendChild(mainContainer);
   }
 }
 
