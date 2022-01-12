@@ -6,3 +6,33 @@
 .container {
     box-sizing: border-box;
 }
+
+.mainContainer{
+    display: column;
+    flex-direction: row;
+    
+}
+
+.subContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* list style */
+
+.name{
+    font-weight: bold
+}
+
+.date{
+    font-style: italic;
+}
+
+.genre{
+    background-color: aqua;
+}
+
+
+
+
