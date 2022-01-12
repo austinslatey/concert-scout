@@ -1,4 +1,5 @@
 // setting object a DOM object 
+
 artistNameEl = document.querySelector("#name");
 dateEl = document.querySelector("#date");
 genreEl = document.querySelector("#genre");
@@ -79,6 +80,7 @@ var grabName = function(id){
 }
 
 var populateVenueList = function(eventsList){
+
   var mainContainer = document.createElement("div");
   mainContainer.classList = "mainContainer";
   for (i=0;i<10;i++){
