@@ -1,5 +1,9 @@
 // setting object a DOM object 
-venueNameEl = document.querySelector("#listOfEvents");
+artistNameEl = document.querySelector("#name");
+dateEl = document.querySelector("#date");
+genreEl = document.querySelector("#genre");
+mainEl = document.querySelector("#main");
+
 nameInputEl = document.querySelector("#userInput");
 submitButtonEl = document.querySelector("#button");
 // Inital Ticket Master API Pull
@@ -28,7 +32,7 @@ var buttonSubmit = function(event) {
   var getVenueId = function(name) {
     
     // format the github api url
-    var apiUrl= "https://app.ticketmaster.com/discovery/v2/venues.json?keyword=FirstAvenue&apikey=" + configTicket.apiKey;
+    var apiUrl= "https://app.ticketmaster.com/discovery/v2/venues.json?keyword=" + name + "&apikey=" + configTicket.apiKey;
     console.log(apiUrl);
     // make a get request to url
     fetch(apiUrl)
@@ -75,10 +79,48 @@ var grabName = function(id){
 }
 
 var populateVenueList = function(eventsList){
-  var listItemEl = document.createElement("div");
-  listItemEl.textContent = eventsList[0].name + " " + eventsList[0].dates.start.localDate;
-  console.log(listItemEl);
-  venueNameEl.appendChild(listItemEl);
+  var mainContainer = document.createElement("div");
+  mainContainer.classList = "mainContainer";
+  for (i=0;i<10;i++){
+
+  // var subcontainer = document.createElement("div");
+  // subcontainer.classList = "subContainer";
+
+  // name of artist and dom creation
+  var nameItemEl = document.createElement("div");
+  nameItemEl.classList = "name";
+  var subcontainerName = document.createElement("div");
+  subcontainerName.classList = "subContainer";
+  nameItemEl.textContent = (eventsList[i].name);
+
+  // date of event and DOM creation
+  var dateItemEl = document.createElement("div");
+  dateItemEl.classList = "date";
+  dateItemEl.textContent = (eventsList[i].dates.start.localDate);
+  var subcontainerDate = document.createElement("div");
+  subcontainerDate.classList = "subContainer";
+
+  // genre of artist and DOM creation
+  var genreItemEl = document.createElement("div");
+  genreItemEl.classList = "genre";
+  genreItemEl.textContent = (eventsList[i].classifications[0].genre.name);
+  var subcontainerGenre = document.createElement("div");
+  subcontainerGenre.classList = "subContainer";
+
+  // appending DOM elements to relavant subcontainers
+  // subcontainer.append(nameItemEl, dateItemEl, genreItemEl);
+  subcontainerName.appendChild(nameItemEl);
+  subcontainerDate.appendChild(dateItemEl);
+  subcontainerGenre.appendChild(genreItemEl);
+
+  // mainContainer.appendChild(subcontainer);
+
+  //appending sub containers to HTML divs
+
+  artistNameEl.appendChild(subcontainerName);
+  dateEl.appendChild(subcontainerDate);
+  genreEl.appendChild(subcontainerGenre);
+  }
 }
 
 submitButtonEl.addEventListener("click", buttonSubmit);
