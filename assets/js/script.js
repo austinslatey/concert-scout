@@ -174,9 +174,9 @@ var overwriteLocalVenue = function(venue){
 }
 
 
-var serpApi = function() {
-  var typeId = "First Avenue";
-  
+var getDataResults = function() {
+  var typeId = "First Ave";
+  //var typeId = nameInputEl
   var urlApi = "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_maps&q=" + typeId + "&api_key=" + configReview.apiKey;
   
   fetch(urlApi, {
@@ -186,17 +186,59 @@ var serpApi = function() {
     .then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
+          //attempt to log data
           console.log(data);
+          //data successful
+          console.log("Find the Data Id");
+          //grab data id in case to implement into maps reviews fetch 
+          var searchId = data.place_results.data_id;
+          console.log("Here is the data ID." + searchId);
+          // grab reviews id
+          var reviewResult = data.place_results.user_reviews.most_relevant[0].description; 
+          console.log("Here are the review results" + reviewResult);
+          
         });
       } else {
         alert("error: " + response.statusText);
       }
     })
     .catch(function(error) {
-      alert("");
+      alert("Unable to connect to Google Map Reviews.");
     });
   }
 
-  serpApi();
+  submitButtonEl.addEventListener("click", getDataResults);
 
-    submitButtonEl.addEventListener("click", buttonSubmit);
+
+  
+
+
+
+ 
+
+  // var getDataId = function() {
+   
+  //   var urlApi = "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_maps_reviews&" + id + "&api_key=" + configReview.apiKey;
+  
+  // fetch(urlApi, {
+  //   "method": "GET",
+    
+  // }) 
+  //   .then(function(response) {
+  //     if (response.ok) {
+  //       response.json().then(function(data) {
+  //         console.log(data);
+  //         console.log(response);
+  //       });
+  //     } else {
+  //       alert("error: " + response.statusText);
+  //     }
+  //   })
+  //   .catch(function(error) {
+  //     alert("Unable to connect to Google Map Reviews.");
+  //   });
+  // }
+  //  getDataId();
+  
+
+  //   submitButtonEl.addEventListener("click", buttonSubmit);
