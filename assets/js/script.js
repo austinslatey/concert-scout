@@ -125,4 +125,77 @@ var populateVenueList = function(eventsList){
   }
 }
 
+
+
+var dataId = "FirstAve"
+var keyApi = "4f020111207d149ae0dbe0147f7b3d35d5e6fccefc3af4cfe7f22d764cca9564";
+var urlApi = "https://serpapi.com/search?engine=google_maps_reviews&data_id=" + dataId + "&api_key=" + keyApi;
+
+/*console.log(urlApi);
+
+fetch(urlApi)
+  .then(function(response) {
+    if (response.ok) {
+      response.json().then(function(data) {
+        console.log(data);
+      });
+    } else {
+      alert("error: " + response.statusText);
+    }
+  })
+  .catch(function(error) {
+    alert("unable to connect");
+  });*/
+var serpApi = function() {
+  var typeId = "0x89c259a61c75684f:0x79d31adb123348d2";
+  
+  var urlApi = "https://serpapi.com/search.json?engine=google_maps&q=" + typeId + "&api_key=" + configReview.apiKey;
+  
+  fetch(urlApi, {
+    "method": "GET",
+    "headers": {
+      "Access-Control-Allow-Origin" : "*"
+      
+    }
+  }) 
+    .then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          console.log(data);
+        });
+      } else {
+        alert("error: " + response.statusText);
+      }
+    })
+    .catch(function(error) {
+      alert("");
+    });
+  }
+
+  serpApi();
+
+    /*var getText = function (buttonSubmit) {
+    fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI?&pageNumber=1&pageSize=10&withThumbnails=false&location=us", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+		"x-rapidapi-key": "fb83bb2bdfmsha133e21ce480744p1bec2bjsndc9557e1bf0a",
+
+	}
+})
+.then(response => {
+  if (response.ok) {
+    response.json().then(function(data) {
+      console.log(data);
+    });
+  } else {
+    alert("error: " + response.statusText);
+  }
+	
+})
+.catch(err => {
+	console.error(err);
+});
+}*/
+
 submitButtonEl.addEventListener("click", buttonSubmit);
