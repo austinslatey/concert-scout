@@ -93,6 +93,7 @@ var populateVenueList = function(eventsList){
   nameItemEl.classList = "name";
   var subcontainerName = document.createElement("div");
   subcontainerName.classList = "subContainer";
+  subcontainerName.classList = "has-background-info";
   nameItemEl.textContent = (eventsList[i].name);
 
   // date of event and DOM creation
@@ -100,7 +101,8 @@ var populateVenueList = function(eventsList){
   dateItemEl.classList = "date";
   dateItemEl.textContent = (eventsList[i].dates.start.localDate);
   var subcontainerDate = document.createElement("div");
-  subcontainerDate.classList = "subContainer";
+  subcontainerDate.classList = "subContainer", "has-background-warning";
+  subcontainerDate.classList = "has-background-info";
 
   // genre of artist and DOM creation
   var genreItemEl = document.createElement("div");
@@ -108,6 +110,7 @@ var populateVenueList = function(eventsList){
   genreItemEl.textContent = (eventsList[i].classifications[0].genre.name);
   var subcontainerGenre = document.createElement("div");
   subcontainerGenre.classList = "subContainer";
+  subcontainerGenre.classList = "has-background-info";
 
   // appending DOM elements to relavant subcontainers
   // subcontainer.append(nameItemEl, dateItemEl, genreItemEl);
