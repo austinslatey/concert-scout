@@ -175,7 +175,7 @@ var overwriteLocalVenue = function(venue){
 
 
 var getDataResults = function() {
-  var typeId = "First Ave";
+  var typeId = "Red Rocks Ampitheater";
   //var typeId = nameInputEl
   var urlApi = "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_maps&q=" + typeId + "&api_key=" + configReview.apiKey;
   
@@ -191,11 +191,17 @@ var getDataResults = function() {
           //data successful
           console.log("Find the Data Id");
           //grab data id in case to implement into maps reviews fetch 
-          var searchId = data.place_results.data_id;
+          var searchId = data.local_results[0].data_id;
           console.log("Here is the data ID." + searchId);
+          var grabId = searchId;
+          globalThis.grabId;
+          console.log(grabId);
+          console.log(globalThis.grabId);
+          
+          
           // grab reviews id
-          var reviewResult = data.place_results.user_reviews.most_relevant[0].description; 
-          console.log("Here are the review results" + reviewResult);
+          //var reviewResult = data.place_results.user_reviews.most_relevant[0].description; 
+          //console.log("Here are the review results" + reviewResult);
           
         });
       } else {
@@ -207,38 +213,45 @@ var getDataResults = function() {
     });
   }
 
-  submitButtonEl.addEventListener("click", getDataResults);
 
+  submitButtonEl.addEventListener("click", getDataResults);
+  
 
   
+
 
 
 
  
 
-  // var getDataId = function() {
+  var grabId = function(grabId) {
+    new XMLHttpRequest(); 
    
-  //   var urlApi = "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_maps_reviews&" + id + "&api_key=" + configReview.apiKey;
+    var urlReviewsApi = ("GET", "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_maps_reviews&data_id" + grabId + "&api_key=" + configReview.apiKey);
   
-  // fetch(urlApi, {
-  //   "method": "GET",
-    
-  // }) 
-  //   .then(function(response) {
-  //     if (response.ok) {
-  //       response.json().then(function(data) {
-  //         console.log(data);
-  //         console.log(response);
-  //       });
-  //     } else {
-  //       alert("error: " + response.statusText);
-  //     }
-  //   })
-  //   .catch(function(error) {
-  //     alert("Unable to connect to Google Map Reviews.");
-  //   });
-  // }
-  //  getDataId();
+  fetch(urlReviewsApi) 
+    .then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          console.log(data);
+          console.log(response);
+        });
+      } else {
+        alert("error: " + response.statusText);
+      }
+    })
+    .catch(function(error) {
+      alert("Unable to connect to Google Map Reviews.");
+    });
+  
+   grabId = function(id) {
+     submitButtonEl.addEventListener("click", buttonSubmit);
+    console.log(id);
+   }
+  }
+  submitButtonEl.addEventListener("click", grabId)
+
+
   
 
   //   submitButtonEl.addEventListener("click", buttonSubmit);
