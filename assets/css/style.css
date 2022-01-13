@@ -1,3 +1,4 @@
+
 :root{
     
 }
@@ -54,7 +55,6 @@
 
 .genre{
 
-    
     border-radius: 15px;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -63,8 +63,5 @@
 .genre:first-child{
     margin-top: 0;
 }
-
-
-
 
 
