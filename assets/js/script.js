@@ -99,6 +99,7 @@ var populateVenueList = function(eventsList){
   nameItemEl.classList = "name";
   var subcontainerName = document.createElement("div");
   subcontainerName.classList = "subContainer";
+  subcontainerName.classList = "has-background-info";
   nameItemEl.textContent = (eventsList[i].name);
   subcontainerName.setAttribute("event-id", eventId);
   eventId++;
@@ -108,10 +109,13 @@ var populateVenueList = function(eventsList){
   var dateItemEl = document.createElement("div");
   dateItemEl.classList = "date";
   dateItemEl.textContent = (eventsList[i].dates.start.localDate);
+    
   var subcontainerDate = document.createElement("div");
   subcontainerDate.classList = "subContainer";
+  subcontainerDate.classList = "has-background-info";
   subcontainerDate.setAttribute("event-id", eventId);
   eventId++;
+
 
   // genre of artist and DOM creation
   var genreItemEl = document.createElement("div");
@@ -119,6 +123,7 @@ var populateVenueList = function(eventsList){
   genreItemEl.textContent = (eventsList[i].classifications[0].genre.name);
   var subcontainerGenre = document.createElement("div");
   subcontainerGenre.classList = "subContainer";
+  subcontainerGenre.classList = "has-background-info";
   subcontainerGenre.setAttribute("event-id", eventId);
   eventId++;
 
