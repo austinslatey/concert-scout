@@ -59,4 +59,16 @@
     margin-top:            0;
 }
 
+@media screen and (max-width: 575px){
+    .genre{
+        height: 100px;
+    }
+    .date{
+        height: 100px;
+    }
+    .name{
+        height: 100px;
+    }
+}
+
 
