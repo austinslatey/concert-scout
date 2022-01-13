@@ -127,13 +127,13 @@ var populateVenueList = function(eventsList){
 
 
 
-var dataId = "FirstAve"
+/*var dataId = "FirstAve"
 var keyApi = "4f020111207d149ae0dbe0147f7b3d35d5e6fccefc3af4cfe7f22d764cca9564";
 var urlApi = "https://serpapi.com/search?engine=google_maps_reviews&data_id=" + dataId + "&api_key=" + keyApi;
 
-/*console.log(urlApi);
+console.log(urlApi);
 
-fetch(urlApi)
+fetch("http://cors-anywhere.herokuapp.com/" + urlApi)
   .then(function(response) {
     if (response.ok) {
       response.json().then(function(data) {
@@ -147,16 +147,13 @@ fetch(urlApi)
     alert("unable to connect");
   });*/
 var serpApi = function() {
-  var typeId = "0x89c259a61c75684f:0x79d31adb123348d2";
+  var typeId = "First Avenue";
   
-  var urlApi = "https://serpapi.com/search.json?engine=google_maps&q=" + typeId + "&api_key=" + configReview.apiKey;
+  var urlApi = "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_maps&q=" + typeId + "&api_key=" + configReview.apiKey;
   
   fetch(urlApi, {
     "method": "GET",
-    "headers": {
-      "Access-Control-Allow-Origin" : "*"
-      
-    }
+    
   }) 
     .then(function(response) {
       if (response.ok) {
@@ -197,5 +194,6 @@ var serpApi = function() {
 	console.error(err);
 });
 }*/
+
 
 submitButtonEl.addEventListener("click", buttonSubmit);
