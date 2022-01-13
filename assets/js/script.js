@@ -7,43 +7,53 @@ mainEl = document.querySelector("#main");
 
 nameInputEl = document.querySelector("#userInput");
 submitButtonEl = document.querySelector("#button");
-// Inital Ticket Master API Pull
+
+// vars for the counter for removing old searches and for checking if user already searched
+var eventId = 0;
+var eventsExist = 0;
+
+// Inital Ticket Master API Pull from button click
+
 var buttonSubmit = function(event) {
-    // prevent page from refreshing
-    event.preventDefault();
+  // prevent page from refreshing
+  event.preventDefault();
 
-  
-    // get value from input element
-    var venueName = nameInputEl.value.trim();
-    var venueSplit = venueName.split(" ");
-    var venueNoSpace = venueSplit.join("");
-    console.log(venueName);
-    console.log(venueSplit);
-    console.log(venueNoSpace);
 
-    if (venueName) {
-      getVenueId(venueName);
+  // get value from input element
+  var venueName = nameInputEl.value.trim();
+  var venueSplit = venueName.split(" ");
+  var venueNoSpace = venueSplit.join("");
+  console.log(venueName);
+  console.log(venueSplit);
+  console.log(venueNoSpace);
+
+  // saving locally
+  venueNameLocalStorageObject = {name: venueName, id: 0};
+  overwriteLocalVenue(venueNameLocalStorageObject);
+  searchedVenues.push(venueNameLocalStorageObject);
+  console.log(searchedVenues[0].id);
+  saveLocalTicketMaster()
   
-    } else {
-      alert("Please enter a Venue name");
-    }
-  };
+  if (venueName) {
+    getVenueId(venueName);
+
+  } else {
+    alert("Please enter a Venue name");
+  }
+};
 
 // Grabs the Venues Id using its Name
   var getVenueId = function(name) {
     
     // format the github api url
     var apiUrl= "https://app.ticketmaster.com/discovery/v2/venues.json?keyword=" + name + "&apikey=" + configTicket.apiKey;
-    console.log(apiUrl);
     // make a get request to url
     fetch(apiUrl)
       .then(function(response) {
         // request was successful
         if (response.ok) {
           response.json().then(function(data) {
-          console.log(data);
           var venueID = data._embedded.venues[0].id;
-          console.log(venueID)
           grabName(venueID)
           });
         } else {
@@ -66,7 +76,6 @@ var grabName = function(id){
       if (response.ok) {
         response.json().then(function(data) {
         eventsList = data._embedded.events;
-        console.log(eventsList)
         populateVenueList(eventsList);
 
         });
@@ -81,12 +90,9 @@ var grabName = function(id){
 
 var populateVenueList = function(eventsList){
 
-  var mainContainer = document.createElement("div");
-  mainContainer.classList = "mainContainer";
-  for (i=0;i<10;i++){
+  removeOldEvents();
 
-  // var subcontainer = document.createElement("div");
-  // subcontainer.classList = "subContainer";
+  for (i=0;i<10;i++){
 
   // name of artist and dom creation
   var nameItemEl = document.createElement("div");
@@ -95,14 +101,21 @@ var populateVenueList = function(eventsList){
   subcontainerName.classList = "subContainer";
   subcontainerName.classList = "has-background-info";
   nameItemEl.textContent = (eventsList[i].name);
+  subcontainerName.setAttribute("event-id", eventId);
+  eventId++;
+  
 
   // date of event and DOM creation
   var dateItemEl = document.createElement("div");
   dateItemEl.classList = "date";
   dateItemEl.textContent = (eventsList[i].dates.start.localDate);
+    
   var subcontainerDate = document.createElement("div");
-  subcontainerDate.classList = "subContainer", "has-background-warning";
+  subcontainerDate.classList = "subContainer";
   subcontainerDate.classList = "has-background-info";
+  subcontainerDate.setAttribute("event-id", eventId);
+  eventId++;
+
 
   // genre of artist and DOM creation
   var genreItemEl = document.createElement("div");
@@ -111,20 +124,51 @@ var populateVenueList = function(eventsList){
   var subcontainerGenre = document.createElement("div");
   subcontainerGenre.classList = "subContainer";
   subcontainerGenre.classList = "has-background-info";
+  subcontainerGenre.setAttribute("event-id", eventId);
+  eventId++;
 
   // appending DOM elements to relavant subcontainers
-  // subcontainer.append(nameItemEl, dateItemEl, genreItemEl);
+
   subcontainerName.appendChild(nameItemEl);
   subcontainerDate.appendChild(dateItemEl);
   subcontainerGenre.appendChild(genreItemEl);
 
-  // mainContainer.appendChild(subcontainer);
+
+
 
   //appending sub containers to HTML divs
-
+  console.log(subcontainerName);
   artistNameEl.appendChild(subcontainerName);
   dateEl.appendChild(subcontainerDate);
   genreEl.appendChild(subcontainerGenre);
+  }
+  eventId = 0;
+  eventsExist++
+}
+
+// remove old venue events
+
+var removeOldEvents = function(){
+  if (eventsExist > 0){
+    for (i=0;i<30;i++){
+    var stringCount = i.toString();
+    var selectedEvent = document.querySelector(".subContainer[event-id='"+ stringCount +"']");
+    selectedEvent.remove();
+    }
+  }
+}
+
+// local storage functions
+
+var saveLocalTicketMaster = function(){
+  window.localStorage.setItem("searchedVenues", JSON.stringify(searchedVenues));
+  }
+
+var overwriteLocalVenue = function(venue){
+  for (i=0;i<1;i++){
+      //  searchedVenues[i].name = venue.name;
+      searchedVenues = [];
+      searchedVenues.push(venueNameLocalStorageObject);
   }
 }
 
