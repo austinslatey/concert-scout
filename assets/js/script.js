@@ -114,6 +114,7 @@ var populateVenueList = function(eventsList){
   subcontainerDate.classList = "subContainer";
   subcontainerDate.classList = "has-background-info";
   subcontainerDate.setAttribute("event-id", eventId);
+  console.log(subcontainerDate)
   eventId++;
 
 
@@ -152,7 +153,7 @@ var removeOldEvents = function(){
   if (eventsExist > 0){
     for (i=0;i<30;i++){
     var stringCount = i.toString();
-    var selectedEvent = document.querySelector(".subContainer[event-id='"+ stringCount +"']");
+    var selectedEvent = document.querySelector(".has-background-info[event-id='"+ stringCount +"']");
     selectedEvent.remove();
     }
   }
