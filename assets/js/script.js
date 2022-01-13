@@ -126,26 +126,6 @@ var populateVenueList = function(eventsList){
 }
 
 
-
-/*var dataId = "FirstAve"
-var keyApi = "4f020111207d149ae0dbe0147f7b3d35d5e6fccefc3af4cfe7f22d764cca9564";
-var urlApi = "https://serpapi.com/search?engine=google_maps_reviews&data_id=" + dataId + "&api_key=" + keyApi;
-
-console.log(urlApi);
-
-fetch("http://cors-anywhere.herokuapp.com/" + urlApi)
-  .then(function(response) {
-    if (response.ok) {
-      response.json().then(function(data) {
-        console.log(data);
-      });
-    } else {
-      alert("error: " + response.statusText);
-    }
-  })
-  .catch(function(error) {
-    alert("unable to connect");
-  });*/
 var serpApi = function() {
   var typeId = "First Avenue";
   
@@ -171,29 +151,4 @@ var serpApi = function() {
 
   serpApi();
 
-    /*var getText = function (buttonSubmit) {
-    fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI?&pageNumber=1&pageSize=10&withThumbnails=false&location=us", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-		"x-rapidapi-key": "fb83bb2bdfmsha133e21ce480744p1bec2bjsndc9557e1bf0a",
-
-	}
-})
-.then(response => {
-  if (response.ok) {
-    response.json().then(function(data) {
-      console.log(data);
-    });
-  } else {
-    alert("error: " + response.statusText);
-  }
-	
-})
-.catch(err => {
-	console.error(err);
-});
-}*/
-
-
-submitButtonEl.addEventListener("click", buttonSubmit);
+    submitButtonEl.addEventListener("click", buttonSubmit);
