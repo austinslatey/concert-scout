@@ -173,4 +173,72 @@ var overwriteLocalVenue = function(venue){
   }
 }
 
-submitButtonEl.addEventListener("click", buttonSubmit);
+
+
+var fetchData = function() {
+  var typeId = nameInputEl.value;
+  console.log(typeId);
+  var urlApi = "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_events&q=" + typeId + "&hl=en&gl=us&api_key=" + configReview.apiKey;
+
+  fetch(urlApi, {
+    "method": "GET",
+    
+  }) 
+    .then(function(response) {
+      if (response.ok) {
+        response.json()
+        .then(function(data) {
+         
+          console.log(data);
+          //attempt to log data
+          var getTicketInfo = data.events_results;
+          console.log(getTicketInfo);
+          
+          for ( var i = 0; i <5; i++){
+          var getTicketInfoData = data.events_results[i].ticket_info[i].link;
+          var getTicketInfoDataTitle = data.events_results[i].title;
+          console.log(getTicketInfoData)
+          console.log(getTicketInfoDataTitle)
+
+        //   var getTicketInfo = [
+        //     data.events_results[0].ticket_info[0],
+        //     data.events_results[1].ticket_info[1],
+        //     data.events_results[2].ticket_info[2],
+        //     data.events_results[0].ticket_info[0],
+        //     data.events_results[0].ticket_info[0]
+        // ]
+          //data successful
+          let output = `<h2>
+                          Tickets! :D 
+                        </h2>`;
+          output += '<ul>'; 
+          
+            output += `
+            <h2>
+               ${getTicketInfoDataTitle}
+            </h2>
+            <li>
+              <<a href= 
+              ${getTicketInfoData}>
+              Get your tickets here</a>>
+              
+            </li>
+            `;
+
+          output += '</ul>';
+        
+          document.getElementById("response").innerHTML += output;
+          }   
+
+        });
+      } else {
+        alert("error: " + response.statusText);
+      }
+    })
+    .catch(function(error) {
+      alert("Unable to connect to Google Map Reviews.");
+    });
+  }
+  
+  document.getElementById("button").addEventListener("click", fetchData);
+  document.getElementById("button").addEventListener("click", buttonSubmit);
