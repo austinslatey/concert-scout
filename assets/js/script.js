@@ -15,8 +15,8 @@ submitButtonEl = document.querySelector("#button");
 var eventId = 0;
 var eventsExist = 0;
 var lengthOflastSearch = 0;
-// Inital Ticket Master API Pull from button click
 
+// Inital Ticket Master API Pull from button click
 var buttonSubmit = function(event) {
   // prevent page from refreshing
   event.preventDefault();
@@ -68,6 +68,7 @@ var buttonSubmit = function(event) {
       });
   };
 
+// grabs venue event details by using the ticketmaster assigned ID
 var grabName = function(id){
   
   var SearchByIdAPI= "https://app.ticketmaster.com/discovery/v2/events.json?size=10&venueId=" + id + "&apikey=" + configTicket.apiKey;
@@ -197,6 +198,7 @@ var populateVenueList = function(eventsList){
   }
 
   eventId = 0;
+  // logs that the user made a search so the program knows to remove divs on next search
   eventsExist++
 }
 
@@ -204,14 +206,15 @@ var populateVenueList = function(eventsList){
 
 var removeOldEvents = function(eventsList){
   if (eventsExist > 0){
+    // vars for length function below
     var artistCount = 0;
     var dateCount = 0;
     var genreCount = 0;
+    // gets length of all parent containers to see how many divs the function has to remove
     artistCount = artistNameEl.children.length;
     dateCount = dateEl.children.length;
     genreCount = genreEl.children.length;
     totalCount = artistCount + dateCount + genreCount -3;
-    console.log(totalCount)
     for (i=0;i<totalCount;i++){
       var stringCount = i.toString();
       var selectedEvent = document.querySelector(".has-background-info[event-id='"+ stringCount +"']");
@@ -225,6 +228,7 @@ var saveLocalTicketMaster = function(){
   window.localStorage.setItem("searchedVenues", JSON.stringify(searchedVenues));
   }
 
+// overwrites local storage, we only need to save one entry
 var overwriteLocalVenue = function(venue){
   for (i=0;i<1;i++){
       //  searchedVenues[i].name = venue.name;
@@ -233,10 +237,22 @@ var overwriteLocalVenue = function(venue){
   }
 }
 
+// load local storage - pass text of alst search to both event and ticket DOM generation functions
 var loadLocalStorage = function(){
-  
+  var oldSearches = localStorage.getItem("searchedVenues");
+  // checks to see if there isn't anything in local storage
+  if (!oldSearches){
+    searchedVenues = [];
+    return false;
+    }
+    oldSearches = JSON.parse(oldSearches);
+    var passedSearch =  oldSearches[0].name;
+    getVenueId(passedSearch);
+    fetchData(passedSearch);
+    eventsExist++
 }
 
+// grabbing ticket links using serpAPI
 var fetchData = function() {
   var typeId = nameInputEl.value;
   console.log(typeId);
@@ -300,7 +316,8 @@ var fetchData = function() {
       // alert("Unable to connect to Google Map Reviews.");
     });
   }
-  
+
+  loadLocalStorage();
   document.getElementById("button").addEventListener("click", fetchData);
   document.getElementById("button").addEventListener("click", buttonSubmit);
 
