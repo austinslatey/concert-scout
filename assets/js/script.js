@@ -224,11 +224,14 @@ var loadLocalStorage = function(){
   
 }
 
+
 var fetchData = function() {
   var typeId = nameInputEl.value;
   console.log(typeId);
   var urlApi = "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_events&q=" + typeId + "&hl=en&gl=us&api_key=" + configReview.apiKey;
+
   document.getElementById("response").innerHTML = "";
+
   fetch(urlApi, {
     "method": "GET",
     
@@ -244,6 +247,7 @@ var fetchData = function() {
           console.log(getTicketInfo);
           
           for ( var i = 0; i <data.events_results[i].ticket_info.length; i++){
+
           var getTicketInfoData = data.events_results[i].ticket_info[i].link;
           var getTicketInfoDataTitle = data.events_results[i].title;
           console.log(getTicketInfoData)
