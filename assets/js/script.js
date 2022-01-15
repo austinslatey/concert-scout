@@ -281,26 +281,20 @@ var fetchData = function() {
           console.log(getTicketInfoData)
           console.log(getTicketInfoDataTitle)
 
-          let output = `<h2>
-                          Tickets! :D 
-                        </h2>`;
-          output += '<ul>'; 
-          
-            output += `
-            <h2>
-               ${getTicketInfoDataTitle}
-            </h2>
-            <li>
-              <<a href= 
-              ${getTicketInfoData}>
-              Get your tickets here</a>>
-              
-            </li>
-            `;
+          var responseContainer = document.getElementById("response")
 
-          output += '</ul>';
+          var ticketHeader = document.createElement("h2");
+          ticketHeader.classList.add("ticketHeader");
+          ticketHeader.id = "ticketHeader" + [i];
+          ticketHeader.textContent = getTicketInfoDataTitle;
+          responseContainer.appendChild(ticketHeader);
+
+          var ticketButton = document.createElement("a");
+          ticketButton.classList.add("button", "is-link", "is-light");
+          ticketButton.setAttribute("href", getTicketInfoData)
+          ticketButton.textContent = "Buy Tickets!";
+          responseContainer.appendChild(ticketButton);
         
-          document.getElementById("response").innerHTML += output;
           }   
 
         });
@@ -325,7 +319,6 @@ var fetchData = function() {
 
 var toggleModal = function() {
   modalEl.classList.add("is-active")
-  debugger;
 }
 
 modalBg.addEventListener("click", function() {
