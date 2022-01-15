@@ -11,7 +11,7 @@ submitButtonEl = document.querySelector("#button");
 // vars for the counter for removing old searches and for checking if user already searched
 var eventId = 0;
 var eventsExist = 0;
-
+var lengthOflastSearch = 0;
 // Inital Ticket Master API Pull from button click
 
 var buttonSubmit = function(event) {
@@ -21,17 +21,11 @@ var buttonSubmit = function(event) {
 
   // get value from input element
   var venueName = nameInputEl.value.trim();
-  var venueSplit = venueName.split(" ");
-  var venueNoSpace = venueSplit.join("");
-  console.log(venueName);
-  console.log(venueSplit);
-  console.log(venueNoSpace);
 
   // saving locally
   venueNameLocalStorageObject = {name: venueName, id: 0};
   overwriteLocalVenue(venueNameLocalStorageObject);
   searchedVenues.push(venueNameLocalStorageObject);
-  console.log(searchedVenues[0].id);
   saveLocalTicketMaster()
   
   if (venueName) {
@@ -68,7 +62,6 @@ var buttonSubmit = function(event) {
 var grabName = function(id){
   
   var SearchByIdAPI= "https://app.ticketmaster.com/discovery/v2/events.json?size=10&venueId=" + id + "&apikey=" + configTicket.apiKey;
-    console.log(SearchByIdAPI);
   
   fetch(SearchByIdAPI)
     .then(function(response) {
@@ -90,75 +83,129 @@ var grabName = function(id){
 
 var populateVenueList = function(eventsList){
 
-  removeOldEvents();
-
-  for (i=0;i<10;i++){
-
-  // name of artist and dom creation
-  var nameItemEl = document.createElement("div");
-  nameItemEl.classList = "name";
-  var subcontainerName = document.createElement("div");
-  subcontainerName.classList = "subContainer";
-  subcontainerName.classList = "has-background-info";
-  nameItemEl.textContent = (eventsList[i].name);
-  subcontainerName.setAttribute("event-id", eventId);
-  eventId++;
+  removeOldEvents(eventsList);
   
+  //function if there are more than 10 upcoming events 
+  if (eventsList.length >= 10){
+    for (i=0;i<10;i++){
 
-  // date of event and DOM creation
-  var dateItemEl = document.createElement("div");
-  dateItemEl.classList = "date";
-  dateItemEl.textContent = (eventsList[i].dates.start.localDate);
+    // name of artist and dom creation
+    var nameItemEl = document.createElement("div");
+    nameItemEl.classList = "name";
+    var subcontainerName = document.createElement("div");
+    subcontainerName.classList = "subContainer";
+    subcontainerName.classList = "has-background-info";
+    nameItemEl.textContent = (eventsList[i].name);
+    subcontainerName.setAttribute("event-id", eventId);
+    eventId++;
     
-  var subcontainerDate = document.createElement("div");
-  subcontainerDate.classList = "subContainer";
-  subcontainerDate.classList = "has-background-info";
-  subcontainerDate.setAttribute("event-id", eventId);
-  console.log(subcontainerDate)
-  eventId++;
+    // date of event and DOM creation
+    var dateItemEl = document.createElement("div");
+    dateItemEl.classList = "date";
+    dateItemEl.textContent = (eventsList[i].dates.start.localDate);
+      
+    var subcontainerDate = document.createElement("div");
+    subcontainerDate.classList = "subContainer";
+    subcontainerDate.classList = "has-background-info";
+    subcontainerDate.setAttribute("event-id", eventId);
+    eventId++;
 
+    // genre of artist and DOM creation
+    var genreItemEl = document.createElement("div");
+    genreItemEl.classList = "genre";
+    genreItemEl.textContent = (eventsList[i].classifications[0].genre.name);
+    var subcontainerGenre = document.createElement("div");
+    subcontainerGenre.classList = "subContainer";
+    subcontainerGenre.classList = "has-background-info";
+    subcontainerGenre.setAttribute("event-id", eventId);
+    eventId++;
 
-  // genre of artist and DOM creation
-  var genreItemEl = document.createElement("div");
-  genreItemEl.classList = "genre";
-  genreItemEl.textContent = (eventsList[i].classifications[0].genre.name);
-  var subcontainerGenre = document.createElement("div");
-  subcontainerGenre.classList = "subContainer";
-  subcontainerGenre.classList = "has-background-info";
-  subcontainerGenre.setAttribute("event-id", eventId);
-  eventId++;
+    // appending DOM elements to relavant subcontainers
 
-  // appending DOM elements to relavant subcontainers
+    subcontainerName.appendChild(nameItemEl);
+    subcontainerDate.appendChild(dateItemEl);
+    subcontainerGenre.appendChild(genreItemEl);
 
-  subcontainerName.appendChild(nameItemEl);
-  subcontainerDate.appendChild(dateItemEl);
-  subcontainerGenre.appendChild(genreItemEl);
+    //appending sub containers to HTML divs
 
-
-
-
-  //appending sub containers to HTML divs
-  console.log(subcontainerName);
-  artistNameEl.appendChild(subcontainerName);
-  dateEl.appendChild(subcontainerDate);
-  genreEl.appendChild(subcontainerGenre);
+    artistNameEl.appendChild(subcontainerName);
+    dateEl.appendChild(subcontainerDate);
+    genreEl.appendChild(subcontainerGenre);
+    }
   }
+
+  // function if there are less then 10 upcoming events
+  if (eventsList.length < 10){
+    for (i=0;i<eventsList.length;i++){
+
+    // name of artist and dom creation
+    var nameItemEl = document.createElement("div");
+    nameItemEl.classList = "name";
+    var subcontainerName = document.createElement("div");
+    subcontainerName.classList = "subContainer";
+    subcontainerName.classList = "has-background-info";
+    nameItemEl.textContent = (eventsList[i].name);
+    subcontainerName.setAttribute("event-id", eventId);
+    eventId++;
+    
+    // date of event and DOM creation
+    var dateItemEl = document.createElement("div");
+    dateItemEl.classList = "date";
+    dateItemEl.textContent = (eventsList[i].dates.start.localDate);
+      
+    var subcontainerDate = document.createElement("div");
+    subcontainerDate.classList = "subContainer";
+    subcontainerDate.classList = "has-background-info";
+    subcontainerDate.setAttribute("event-id", eventId);
+    eventId++;
+
+    // genre of artist and DOM creation
+    var genreItemEl = document.createElement("div");
+    genreItemEl.classList = "genre";
+    genreItemEl.textContent = (eventsList[i].classifications[0].genre.name);
+    var subcontainerGenre = document.createElement("div");
+    subcontainerGenre.classList = "subContainer";
+    subcontainerGenre.classList = "has-background-info";
+    subcontainerGenre.setAttribute("event-id", eventId);
+    eventId++;
+
+    // appending DOM elements to relavant subcontainers
+
+    subcontainerName.appendChild(nameItemEl);
+    subcontainerDate.appendChild(dateItemEl);
+    subcontainerGenre.appendChild(genreItemEl);
+
+    //appending sub containers to HTML divs
+
+    artistNameEl.appendChild(subcontainerName);
+    dateEl.appendChild(subcontainerDate);
+    genreEl.appendChild(subcontainerGenre);
+    }
+  }
+
   eventId = 0;
   eventsExist++
 }
 
 // remove old venue events
 
-var removeOldEvents = function(){
+var removeOldEvents = function(eventsList){
   if (eventsExist > 0){
-    for (i=0;i<30;i++){
-    var stringCount = i.toString();
-    var selectedEvent = document.querySelector(".has-background-info[event-id='"+ stringCount +"']");
-    selectedEvent.remove();
+    var artistCount = 0;
+    var dateCount = 0;
+    var genreCount = 0;
+    artistCount = artistNameEl.children.length;
+    dateCount = dateEl.children.length;
+    genreCount = genreEl.children.length;
+    totalCount = artistCount + dateCount + genreCount -3;
+    console.log(totalCount)
+    for (i=0;i<totalCount;i++){
+      var stringCount = i.toString();
+      var selectedEvent = document.querySelector(".has-background-info[event-id='"+ stringCount +"']");
+      selectedEvent.remove();
     }
   }
 }
-
 // local storage functions
 
 var saveLocalTicketMaster = function(){
@@ -173,4 +220,70 @@ var overwriteLocalVenue = function(venue){
   }
 }
 
-submitButtonEl.addEventListener("click", buttonSubmit);
+var loadLocalStorage = function(){
+  
+}
+
+
+var fetchData = function() {
+  var typeId = nameInputEl.value;
+  console.log(typeId);
+  var urlApi = "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_events&q=" + typeId + "&hl=en&gl=us&api_key=" + configReview.apiKey;
+
+  document.getElementById("response").innerHTML = "";
+
+  fetch(urlApi, {
+    "method": "GET",
+    
+  }) 
+    .then(function(response) {
+      if (response.ok) {
+        response.json()
+        .then(function(data) {
+         
+          console.log(data);
+          //attempt to log data
+          var getTicketInfo = data.events_results;
+          console.log(getTicketInfo);
+          
+          for ( var i = 0; i <data.events_results[i].ticket_info.length; i++){
+
+          var getTicketInfoData = data.events_results[i].ticket_info[i].link;
+          var getTicketInfoDataTitle = data.events_results[i].title;
+          console.log(getTicketInfoData)
+          console.log(getTicketInfoDataTitle)
+
+          let output = `<h2>
+                          Tickets! :D 
+                        </h2>`;
+          output += '<ul>'; 
+          
+            output += `
+            <h2>
+               ${getTicketInfoDataTitle}
+            </h2>
+            <li>
+              <<a href= 
+              ${getTicketInfoData}>
+              Get your tickets here</a>>
+              
+            </li>
+            `;
+
+          output += '</ul>';
+        
+          document.getElementById("response").innerHTML += output;
+          }   
+
+        });
+      } else {
+        alert("error: " + response.statusText);
+      }
+    })
+    .catch(function(error) {
+      alert("Unable to connect to Google Map Reviews.");
+    });
+  }
+  
+  document.getElementById("button").addEventListener("click", fetchData);
+  document.getElementById("button").addEventListener("click", buttonSubmit);

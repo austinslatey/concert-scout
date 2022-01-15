@@ -1,9 +1,6 @@
-:root{
-    
-}
 * {
-    margin:  0;
-    padding: 0;
+    margin:   0;
+    padding:  0;
     width: 100%;
 }
 
@@ -12,59 +9,90 @@
 }
 
 .mainContainer{
-    display: column;
+    display:     column;
     flex-direction: row;
-    text-align: center;
-
-    
+    text-align:  center;
 }
 
 .subContainer{
-    display: flex;
-    flex-direction: row;
+    display:                  flex;
+    flex-direction:            row;
     justify-content: space-between;
-    margin: 5px;
-    text-align: center;
+    margin:                    5px;
+    text-align:             center;
+}
+.has-background-info{
+    border-radius: 5px;
 }
 
 /* list style */
 
 .name{
-    border-radius: 15px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    
+    font-weight:        bold;
+    margin-bottom:      10px;
     justify-content: inherit;
+    height:             45px;
 }
 .name:first-child{
-    margin-top: 0;
+    margin-top:            0;
 }
 
 .date{
-    border-radius: 15px;
-    font-style: italic;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    font-style:       italic;
+    margin-bottom:      10px;
+    margin-top:         10px;
     justify-content: inherit;
+    height:             45px;
 }
 .date:first-child{
-    margin-top: 0;
+    margin-top:            0;
 }
 
 
 .genre{
-feature/mobile-layout
-
-    border-radius: 15px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom:      10px;
+    margin-top:         10px;
     justify-content: inherit;
+    height:             45px;
 }
 .genre:first-child{
-    margin-top: 0;
+    margin-top:            0;
 }
 
+@media screen and (max-width: 1165px){
+    .genre{
+        height: 75px;
+    }
+    .date{
+        height: 75px;
+    }
+    .name{
+        height: 75px;
+    }
+}
 
+@media screen and (max-width: 970px){
+    .genre{
+        height: 100px;
+    }
+    .date{
+        height: 100px;
+    }
+    .name{
+        height: 100px;
+    }
+}
 
+@media screen and (max-width: 575px){
+    .genre{
+        height: 100px;
+    }
+    .date{
+        height: 100px;
+    }
+    .name{
+        height: 100px;
+    }
+}
 
 
