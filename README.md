@@ -19,3 +19,5 @@
     Kyler Mclachlan : Kyler-Mclachlan
     A_Byers : Lippo-Hippo
     Austin Slater : austinslatey 
+    
+![Concert-Scout](https://user-images.githubusercontent.com/93648326/149425101-bf29c067-c863-48dc-82ce-7acb6e5051c5.png)
