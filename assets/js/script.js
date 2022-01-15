@@ -215,7 +215,7 @@ var fetchData = function() {
           
             output += `
             <h2>
-                          ${getTicketInfoDataTitle}
+               ${getTicketInfoDataTitle}
             </h2>
             <li>
               <<a href= 
@@ -224,9 +224,7 @@ var fetchData = function() {
               
             </li>
             `;
-          
-          
-          
+
           output += '</ul>';
         
           document.getElementById("response").innerHTML += output;
@@ -244,46 +242,3 @@ var fetchData = function() {
   
   document.getElementById("button").addEventListener("click", fetchData);
   document.getElementById("button").addEventListener("click", buttonSubmit);
-
-
-  
-  
-
-  
-
-
-
-    
- 
-
-  // var grabId = function() {
-
-  //   var metaDataId = "61e0d910a1b423316c706cff";
-
-    
-    
-    
-   
-  //   var urlReviewsApi =  "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_maps_reviews&data_id=" + metaDataId + "&api_key=" + configReview.apiKey;
-  
-  // fetch(urlReviewsApi, {
-  //   "method":  "GET",
-              
-  // }) 
-  //   .then(function(response) {
-  //     if (response.ok) {
-  //       response.json().then(function(data) { 
-  //         console.log(response);
-  //         console.log(data);
-  //       });
-  //     } else {
-  //       alert("error: " + response.statusText);
-  //     }
-  //   })
-  //   .catch(function(error) {
-  //     alert("Unable to connect to Google Map Reviews.");
-  //   });
-  // }
-
-
-
