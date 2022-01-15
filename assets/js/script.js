@@ -221,9 +221,14 @@ var overwriteLocalVenue = function(venue){
 }
 
 var loadLocalStorage = function(){
-  
+  var oldSearches = localStorage.getItem("searchedVenues");
+  if (!oldSearches){
+    searchedVenues = [];
+    return false;
+    }
+  console.log(oldSearches)
 }
-
+loadLocalStorage();
 var fetchData = function() {
   var typeId = nameInputEl.value;
   console.log(typeId);
