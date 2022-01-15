@@ -11,7 +11,7 @@ submitButtonEl = document.querySelector("#button");
 // vars for the counter for removing old searches and for checking if user already searched
 var eventId = 0;
 var eventsExist = 0;
-
+var lengthOflastSearch = 0;
 // Inital Ticket Master API Pull from button click
 
 var buttonSubmit = function(event) {
@@ -83,7 +83,6 @@ var grabName = function(id){
 
 var populateVenueList = function(eventsList){
 
-  var lengthOflastSearch =
   removeOldEvents(eventsList);
   
   //function if there are more than 10 upcoming events 
@@ -183,6 +182,7 @@ var populateVenueList = function(eventsList){
     genreEl.appendChild(subcontainerGenre);
     }
   }
+
   eventId = 0;
   eventsExist++
 }
@@ -191,16 +191,18 @@ var populateVenueList = function(eventsList){
 
 var removeOldEvents = function(eventsList){
   if (eventsExist > 0){
-    for (i=0;i<30;i++){
+    var artistCount = 0;
+    var dateCount = 0;
+    var genreCount = 0;
+    artistCount = artistNameEl.children.length;
+    dateCount = dateEl.children.length;
+    genreCount = genreEl.children.length;
+    totalCount = artistCount + dateCount + genreCount -3;
+    console.log(totalCount)
+    for (i=0;i<totalCount;i++){
       var stringCount = i.toString();
       var selectedEvent = document.querySelector(".has-background-info[event-id='"+ stringCount +"']");
-      console.log(selectedEvent)
-      if (typeof selectedEvent != "undefined"){
-        selectedEvent.remove();
-        }
-      if (typeof selectedEvent == "undefined"){
-        return
-      }
+      selectedEvent.remove();
     }
   }
 }
@@ -222,4 +224,62 @@ var loadLocalStorage = function(){
   
 }
 
-submitButtonEl.addEventListener("click", buttonSubmit);
+var fetchData = function() {
+  var typeId = nameInputEl.value;
+  console.log(typeId);
+  var urlApi = "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_events&q=" + typeId + "&hl=en&gl=us&api_key=" + configReview.apiKey;
+  document.getElementById("response").innerHTML = "";
+  fetch(urlApi, {
+    "method": "GET",
+    
+  }) 
+    .then(function(response) {
+      if (response.ok) {
+        response.json()
+        .then(function(data) {
+         
+          console.log(data);
+          //attempt to log data
+          var getTicketInfo = data.events_results;
+          console.log(getTicketInfo);
+          
+          for ( var i = 0; i <data.events_results[i].ticket_info.length; i++){
+          var getTicketInfoData = data.events_results[i].ticket_info[i].link;
+          var getTicketInfoDataTitle = data.events_results[i].title;
+          console.log(getTicketInfoData)
+          console.log(getTicketInfoDataTitle)
+
+          let output = `<h2>
+                          Tickets! :D 
+                        </h2>`;
+          output += '<ul>'; 
+          
+            output += `
+            <h2>
+               ${getTicketInfoDataTitle}
+            </h2>
+            <li>
+              <<a href= 
+              ${getTicketInfoData}>
+              Get your tickets here</a>>
+              
+            </li>
+            `;
+
+          output += '</ul>';
+        
+          document.getElementById("response").innerHTML += output;
+          }   
+
+        });
+      } else {
+        alert("error: " + response.statusText);
+      }
+    })
+    .catch(function(error) {
+      alert("Unable to connect to Google Map Reviews.");
+    });
+  }
+  
+  document.getElementById("button").addEventListener("click", fetchData);
+  document.getElementById("button").addEventListener("click", buttonSubmit);
