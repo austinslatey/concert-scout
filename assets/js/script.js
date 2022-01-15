@@ -4,6 +4,9 @@ artistNameEl = document.querySelector("#name");
 dateEl = document.querySelector("#date");
 genreEl = document.querySelector("#genre");
 mainEl = document.querySelector("#main");
+modalEl = document.querySelector(".modal");
+modalBg = document.querySelector(".modal-background");
+modalText = document.querySelector("#modalText");
 
 nameInputEl = document.querySelector("#userInput");
 submitButtonEl = document.querySelector("#button");
@@ -32,7 +35,9 @@ var buttonSubmit = function(event) {
     getVenueId(venueName);
 
   } else {
-    alert("Please enter a Venue name");
+   toggleModal();
+    modalText.textContent= "Please enter a Venue name";
+    // alert("Please enter a Venue name");
   }
 };
 
@@ -51,11 +56,15 @@ var buttonSubmit = function(event) {
           grabName(venueID)
           });
         } else {
-          alert("Error: " + response.statusText);
+         toggleModal();
+          modalText.textContent="Error: " + response.statusText;
+          // alert("Error: " + response.statusText);
         }
       })
       .catch(function(error) {
-        alert("Unable to connect to Ticketmaster");
+       toggleModal();
+        modalText.textContent="Unable to connect to Ticketmaster";
+        // alert("Unable to connect to Ticketmaster");
       });
   };
 
@@ -73,11 +82,15 @@ var grabName = function(id){
 
         });
       } else {
-        alert("Error: " + response.statusText);
+       toggleModal();
+        modalText.textContent= "Error: " + response.statusText;
+        // alert("Error: " + response.statusText)
       }
     })
     .catch(function(error) {
-      alert("Unable to connect to Ticketmaster");
+     toggleModal();
+      modalText.textContent= "Unable to connect to Ticketmaster";
+      // alert("Unable to connect to Ticketmaster");
     });  
 }
 
@@ -224,7 +237,6 @@ var loadLocalStorage = function(){
   
 }
 
-
 var fetchData = function() {
   var typeId = nameInputEl.value;
   console.log(typeId);
@@ -277,13 +289,30 @@ var fetchData = function() {
 
         });
       } else {
-        alert("error: " + response.statusText);
+       toggleModal();
+        modalText.textContent= "error: " + response.statusText;
+        // alert("error: " + response.statusText);
       }
     })
     .catch(function(error) {
-      alert("Unable to connect to Google Map Reviews.");
+      toggleModal();
+      modalText.textContent= "Unable to connect to Google Map Reviews.";
+      // alert("Unable to connect to Google Map Reviews.");
     });
   }
   
   document.getElementById("button").addEventListener("click", fetchData);
   document.getElementById("button").addEventListener("click", buttonSubmit);
+
+// Define Modal function
+
+var toggleModal = function() {
+  modalEl.classList.add("is-active")
+  debugger;
+}
+
+modalBg.addEventListener("click", function() {
+  // console.log("Modal BG was clicked")
+  modalEl.classList.remove("is-active");
+  modalText.textContent = "";
+});
