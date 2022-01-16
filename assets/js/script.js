@@ -256,7 +256,7 @@ var loadLocalStorage = function(){
 var fetchData = function() {
   var typeId = nameInputEl.value;
   console.log(typeId);
-  var urlApi = "http://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_events&q=" + typeId + "&hl=en&gl=us&api_key=" + configReview.apiKey;
+  var urlApi = "https://cors-anywhere.herokuapp.com/" + "https://serpapi.com/search.json?engine=google_events&q=" + typeId + "&hl=en&gl=us&api_key=" + configReview.apiKey;
 
   document.getElementById("response").innerHTML = "";
 
