@@ -10,19 +10,22 @@
     THEN I am presented a list of upcoming artist playing at the specific venue. 
     SIMULTANEOUSLY showing a artist name, date, and genre of the artist,
     AND a presentation of ticket infomation upon search.
-# Credentials
 
+# Credentials
 [Ticketmaster] (https://developer.ticketmaster.com/)
 
 [Serpapi-API] (https://serpapi.com/search.json?engine=google_events)
 
 [CSS-Frameworks-using-Bulma] (https://bulma.io/)
 
+# Deployed Application Website
+https://austinslatey.github.io/concert-scout/
+
 # Developers-Githubs' Name-&-Repo
-    Johnathan Shields : Agent-Shields
-    Kyler Mclachlan : Kyler-Mclachlan
-    A_Byers : Lippo-Hippo
-    Austin Slater : austinslatey 
+    Johnathan Shields : Agent-Shields, https://github.com/Agent-Shields
+    Kyler Mclachlan : Kyler-Mclachlan, https://github.com/Kyler-Mclachlan
+    A_Byers : Lippo-Hippo, https://github.com/LippoHippo
+    Austin Slater : austinslatey, https://github.com/austinslatey 
     
 ![Concert-Scout](https://user-images.githubusercontent.com/93648326/149425101-bf29c067-c863-48dc-82ce-7acb6e5051c5.png)
 
