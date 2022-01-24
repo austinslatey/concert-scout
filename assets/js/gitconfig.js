@@ -2,5 +2,5 @@ var configTicket = {
     apiKey: "GiFfN2Pj3et5Zj8pS9ebqjtcDdRppCp5"
 };
 var configReview = {
-    apiKey: "43f4c2fb6e103996ded2e8160e128178ff8011be85beb2293d1b9d4cf5f883b3"
+    apiKey: "4f020111207d149ae0dbe0147f7b3d35d5e6fccefc3af4cfe7f22d764cca9564"
 };
