@@ -1,14 +1,12 @@
 # Concert-Scout-Description
-    A repository built by four developers using HTML, CSS Frameworks, third party API's, and Javascript.
-    Launching a creative website, that searches for upcoming events that are involved with the designated concert venue.
+    A repository built by four developers using HTML, CSS Frameworks, third party API's, and Javascript. Launching a creative website, that searches for upcoming events that are     involved with the designated concert venue.
     Upon the search, the website will display multiple preformers upcoming at concert venue selected.
     You will also be provided with ticket information if you're tempted to buy.
 
 # User-Story 
     I WANT to land on a page 
     WHERE I will have the opportunity to search for a concert venue.
-    THEN I am presented a list of upcoming artist playing at the specific venue. 
-    SIMULTANEOUSLY showing a artist name, date, and genre of the artist,
+    THEN I am presented a list of upcoming artist playing at the specific venue. SIMULTANEOUSLY showing a artist name, date, and genre of the artist,
     AND a presentation of ticket infomation upon search.
 
 # Credentials
