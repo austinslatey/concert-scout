@@ -23,13 +23,13 @@
 https://austinslatey.github.io/concert-scout/
 
 # Developers-Githubs' Name-&-Repo
-[Johnathan-Shields] (https://github.com/Agent-Shields)
+[Johnathan-Shields](https://github.com/Agent-Shields)
 
-[Kyler-Mclachlan] (https://github.com/Kyler-Mclachlan)
+[Kyler-Mclachlan](https://github.com/Kyler-Mclachlan)
 
-[A_Byers] (https://github.com/LippoHippo)
+[A_Byers](https://github.com/LippoHippo)
 
-[Austin-Slater] (https://github.com/austinslatey) 
+[Austin-Slater](https://github.com/austinslatey) 
     
 ![Concert-Scout](https://user-images.githubusercontent.com/93648326/149425101-bf29c067-c863-48dc-82ce-7acb6e5051c5.png)
 
